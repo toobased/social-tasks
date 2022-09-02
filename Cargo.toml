@@ -1,0 +1,14 @@
+[package]
+name = "social-tasks"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+socials_core = { git = "https://github.com/worlddeleteRin/socials-core.git#master"}
+log = "0.4.17"
+tokio = { version = "1.19.2", features = ["full"] }
+env_logger = "0.9.0"
+clap = "3.2.17"
+futures = "0.3.21"

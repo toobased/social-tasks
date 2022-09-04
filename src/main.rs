@@ -42,7 +42,7 @@ pub async fn make_task(query: &BotTaskQuery, task_type: &TaskType, db: &SocialsD
 }
 
 pub async fn loop_task(config: &AppConfig, query: &BotTaskQuery, task_type: &TaskType) {
-    let db = SocialsDb::new_test_instance().await.unwrap();
+    let db = SocialsDb::new_instance().await.unwrap();
     // TODO improve?
     match task_type {
         TaskType::Browser => { if !config.args.run_browser { return } },

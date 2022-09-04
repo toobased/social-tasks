@@ -1503,7 +1503,7 @@ dependencies = [
 [[package]]
 name = "socials_core"
 version = "0.1.0"
-source = "git+https://github.com/worlddeleteRin/socials-core.git?rev=56c2454#56c24545d797b110666974d862d6a982311da9d9"
+source = "git+https://github.com/worlddeleteRin/socials-core.git?rev=f0b8d67#f0b8d67e8a4eb683cd146a468b768b54e2e1ed27"
 dependencies = [
  "async-trait",
  "bson",

@@ -12,7 +12,7 @@ env:
 jobs:
   build:
 
-    runs-on: [rpi-green, slave-green]
+    runs-on: slave-green
 
     steps:
     - uses: actions/checkout@v3

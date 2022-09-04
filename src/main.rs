@@ -30,7 +30,6 @@ pub async fn get_task(query: &BotTaskQuery, db: &SocialsDb) -> Option<BotTask> {
 }
 
 pub async fn make_task(query: &BotTaskQuery, task_type: &TaskType, db: &SocialsDb) {
-    // info!("query is {:#?}", query.collect_filters());
     let task = get_task(query, db).await;
     match task {
         Some(mut task) => {

@@ -20,8 +20,13 @@ jobs:
     - name: Build debug
       run: cargo build
 
-  build-slave-green:
+  restart-tasks-rpi-green:
+    needs: build-rpi-green
+    runs-on: rpi-green
+    - name: Restart service
+      run: sudo systemctl restart social-tasks
 
+  build-slave-green:
     runs-on: slave-green
     steps:
     - uses: actions/checkout@v3
@@ -29,3 +34,9 @@ jobs:
         clean: false
     - name: Build debug
       run: cargo build
+
+  restart-tasks-slave-green:
+    needs: build-slave-green
+    runs-on: slave-green
+    - name: Restart service
+      run: sudo systemctl restart social-tasks

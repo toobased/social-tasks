@@ -23,8 +23,8 @@ jobs:
   restart-tasks-rpi-green:
     needs: build-rpi-green
     runs-on: rpi-green
-    - name: Restart service
-      run: sudo systemctl restart social-tasks
+      - name: Restart service
+        run: sudo systemctl restart social-tasks
 
   build-slave-green:
     runs-on: slave-green
@@ -38,5 +38,5 @@ jobs:
   restart-tasks-slave-green:
     needs: build-slave-green
     runs-on: slave-green
-    - name: Restart service
-      run: sudo systemctl restart social-tasks
+      - name: Restart service
+        run: sudo systemctl restart social-tasks

@@ -34,7 +34,7 @@ pub async fn make_task(query: &BotTaskQuery, task_type: &TaskType, db: &SocialsD
     match task {
         Some(mut task) => {
             info!("Will make {} {}", task.id, task.title);
-            task.make().await;
+            task.make(db).await;
             task.update_db(&db).await.expect("Cant update task in db");
         }
         None => info!("[{}] No task to make!", task_type)

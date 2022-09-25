@@ -2,10 +2,20 @@ use std::time::Duration;
 
 use clap::Arg;
 
-pub enum TaskType {
-    Browser,
-    Regular
+#[derive(Clone, Debug)]
+pub enum AppMode { Prod, Dev }
+
+impl From<String> for AppMode {
+    fn from(v: String) -> Self {
+        if v.eq("prod") {
+            Self::Prod
+        } else if v.eq("dev") {
+            Self::Dev
+        } else { Self::Prod }
+    }
 }
+
+pub enum TaskType { Browser, Regular }
 
 impl std::fmt::Display for TaskType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -47,6 +57,7 @@ pub struct AppArgs {
     pub run_browser: bool,
     pub run_regular: bool,
     pub browser_threads: i32,
+    pub mode: AppMode
 }
 
 impl From<clap::ArgMatches> for AppArgs {
@@ -57,10 +68,13 @@ impl From<clap::ArgMatches> for AppArgs {
             // .unwrap_or(&"1".to_string());
         let browser_threads = b_threads.parse::<i32>()
             .expect("Cant parse browser_threads to number. Invalid input");
+        let mode = args.get_one::<String>("mode").unwrap_or(&"prod".to_string()).to_owned();
+        let mode = AppMode::from(mode);
         Self {
             run_browser,
             run_regular,
-            browser_threads
+            browser_threads,
+            mode
         }
     }
 }
@@ -82,6 +96,10 @@ pub fn parse_args () -> AppConfig {
             .takes_value(true)
             .default_value("1")
             .help("Browser threads to spawn"))
+        .arg(Arg::new("mode")
+            .long("mode")
+            .takes_value(true)
+            .default_value("prod"))
     .get_matches();
     let args = AppArgs::from(matches);
     AppConfig::new(args)

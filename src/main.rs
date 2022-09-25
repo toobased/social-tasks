@@ -2,6 +2,8 @@ use config::{AppConfig, TaskType};
 use log::info;
 use socials_core::{db::SocialsDb, tasks::{BotTask, BotTaskQuery}};
 
+use crate::config::AppMode;
+
 pub mod config;
 #[cfg(test)]
 pub mod tests;
@@ -42,7 +44,10 @@ pub async fn make_task(query: &BotTaskQuery, task_type: &TaskType, db: &SocialsD
 }
 
 pub async fn loop_task(config: &AppConfig, query: &BotTaskQuery, task_type: &TaskType) {
-    let db = SocialsDb::new_instance().await.unwrap();
+    let db = match config.args.mode {
+        AppMode::Dev => SocialsDb::new_test_instance().await.unwrap(),
+        AppMode::Prod => SocialsDb::new_instance().await.unwrap()
+    };
     // TODO improve?
     match task_type {
         TaskType::Browser => { if !config.args.run_browser { return } },

@@ -8,8 +8,9 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RPIGREEN: /home/rin/actions-runner/_work/socials-backend/socials-backend/target/debug/social-tasks
-  SLAVEGREEN: /home/rin/actions-runner/_work/socials-backend/socials-backend/target/debug/social-tasks
+  PRJ: social-tasks
+  RPIGREEN: /home/rin/actions-runner/_work/$PRJ/$PRJ/target/debug/$PRJ
+  SLAVEGREEN: /home/rin/actions-runner/_work/$PRJ/$PRJ/target/debug/$PRJ
 
 jobs:
   build-rpi-green:

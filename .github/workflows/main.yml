@@ -10,6 +10,7 @@ env:
   CARGO_TERM_COLOR: always
   RPIGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/debug/social-tasks
   SLAVEGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/debug/social-tasks
+  HPGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/debug/social-tasks
 
 jobs:
   build-rpi-green:
@@ -50,5 +51,25 @@ jobs:
     steps:
     - name: Replace fresh bin
       run: sudo cp -f $SLAVEGREEN /usr/bin/social-tasks
+    - name: Restart service
+      run: sudo systemctl restart social-tasks
+
+  build-hpgreen:
+    runs-on: hpgreen
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        clean: false
+    - name: Stop service
+      run: sudo systemctl stop social-tasks
+    - name: Build debug
+      run: cargo build
+
+  restart-tasks-hpgreen:
+    needs: build-hpgreen
+    runs-on: hpgreen
+    steps:
+    - name: Replace fresh bin
+      run: sudo cp -f $HPGREEN /usr/bin/social-tasks
     - name: Restart service
       run: sudo systemctl restart social-tasks

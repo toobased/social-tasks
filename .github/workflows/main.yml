@@ -48,7 +48,6 @@ jobs:
     needs: build-slave-green
     runs-on: slave-green
     steps:
-    steps:
     - name: Replace fresh bin
       run: sudo cp -f $slave-green-project /usr/bin/social-tasks
     - name: Restart service

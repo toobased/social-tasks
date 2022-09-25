@@ -8,8 +8,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  rpi-green-project: /home/rin/actions-runner/_work/socials-backend/socials-backend/target/debug/social-tasks
-  slave-green-project: /home/rin/actions-runner/_work/socials-backend/socials-backend/target/debug/social-tasks
+  RPIGREEN: /home/rin/actions-runner/_work/socials-backend/socials-backend/target/debug/social-tasks
+  SLAVEGREEN: /home/rin/actions-runner/_work/socials-backend/socials-backend/target/debug/social-tasks
 
 jobs:
   build-rpi-green:
@@ -29,7 +29,7 @@ jobs:
     runs-on: rpi-green
     steps:
     - name: Replace fresh bin
-      run: sudo cp -f $rpi-green-project /usr/bin/social-tasks
+      run: sudo cp -f $RPIGREEN /usr/bin/social-tasks
     - name: Restart service
       run: sudo systemctl restart social-tasks
 
@@ -49,6 +49,6 @@ jobs:
     runs-on: slave-green
     steps:
     - name: Replace fresh bin
-      run: sudo cp -f $slave-green-project /usr/bin/social-tasks
+      run: sudo cp -f $SLAVEGREEN /usr/bin/social-tasks
     - name: Restart service
       run: sudo systemctl restart social-tasks

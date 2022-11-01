@@ -23,7 +23,7 @@ jobs:
     - name: Stop service
       run: sudo systemctl stop social-tasks
     - name: Build debug
-      run: cargo build
+      run: cargo update && cargo build
 
   restart-tasks-rpi-green:
     needs: build-rpi-green
@@ -43,7 +43,7 @@ jobs:
     - name: Stop service
       run: sudo systemctl stop social-tasks
     - name: Build debug
-      run: cargo build
+      run: cargo update && cargo build
 
   restart-tasks-slave-green:
     needs: build-slave-green
@@ -63,7 +63,7 @@ jobs:
     - name: Stop service
       run: sudo systemctl stop social-tasks
     - name: Build debug
-      run: cargo build
+      run: cargo update && cargo build
 
   restart-tasks-hpgreen:
     needs: build-hpgreen

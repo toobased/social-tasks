@@ -11,7 +11,7 @@ impl From<String> for AppMode {
             Self::Prod
         } else if v.eq("dev") {
             Self::Dev
-        } else { Self::Prod }
+        } else { Self::Dev }
     }
 }
 
@@ -99,7 +99,7 @@ pub fn parse_args () -> AppConfig {
         .arg(Arg::new("mode")
             .long("mode")
             .takes_value(true)
-            .default_value("prod"))
+            .default_value("dev"))
     .get_matches();
     let args = AppArgs::from(matches);
     AppConfig::new(args)

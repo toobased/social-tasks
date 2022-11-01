@@ -13,6 +13,7 @@ pub fn browser_task_query() -> BotTaskQuery {
     let mut query = BotTaskQuery::default();
     query
         .is_active()
+        .not_sleep()
         .is_browser()
         .top_old_updated();
     query
@@ -22,6 +23,7 @@ pub fn regular_task_query() -> BotTaskQuery {
     let mut query = BotTaskQuery::default();
     query
         .is_active()
+        .not_sleep()
         .not_browser()
         .top_old_updated();
     query
@@ -76,7 +78,8 @@ pub async fn make_tasks(config: AppConfig) {
 
 #[tokio::main]
 async fn main() {
-    env_logger::init();
+    env_logger::try_init().ok();
+    log::set_max_level(log::LevelFilter::Info);
     let config = config::parse_args();
     info!("Config initialized. {:#?}", config);
     // tests::crud_tasks().await;

@@ -6,9 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-socials_core = { git = "https://github.com/worlddeleteRin/socials-core.git", rev = "f429c8a" }
+socials_core = { git = "https://github.com/worlddeleteRin/socials-core.git", rev = "origin/master" }
 log = "0.4.17"
-tokio = { version = "1.19.2", features = ["full"] }
+tokio = { version = "1.21.2", features = ["full"] }
 env_logger = "0.9.0"
 clap = "3.2.17"
 futures = "0.3.21"

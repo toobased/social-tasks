@@ -33,7 +33,7 @@ pub async fn get_task(query: &BotTaskQuery, db: &SocialsDb) -> Option<BotTask> {
     SocialsDb::find_one::<BotTask, BotTaskQuery>(query, &db.bots_tasks()).await.unwrap()
 }
 
-pub async fn make_task(query: &BotTaskQuery, task_type: &TaskType, db: &SocialsDb) {
+pub async fn make_task(query: &BotTaskQuery, _task_type: &TaskType, db: &SocialsDb) {
     let task = get_task(query, db).await;
     match task {
         Some(mut task) => {
@@ -41,7 +41,9 @@ pub async fn make_task(query: &BotTaskQuery, task_type: &TaskType, db: &SocialsD
             task.make(db).await;
             task.update_db(&db).await.expect("Cant update task in db");
         }
-        None => info!("[{}] No task to make!", task_type)
+        None => {
+            // info!("[{}] No task to make!", task_type)
+        }
     }
 }
 

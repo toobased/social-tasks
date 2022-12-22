@@ -6,9 +6,9 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RPIGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/debug/social-tasks
-  SLAVEGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/debug/social-tasks
-  HPGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/debug/social-tasks
+  RPIGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/release/social-tasks
+  SLAVEGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/release/social-tasks
+  HPGREEN: /home/rin/actions-runner/_work/social-tasks/social-tasks/target/release/social-tasks
 
 jobs:
   build-rpi-green:
@@ -20,8 +20,8 @@ jobs:
         clean: false
     - name: Stop service
       run: sudo systemctl stop social-tasks
-    - name: Build debug
-      run: cargo update && cargo build
+    - name: Build release
+      run: cargo update && cargo build -r
 
   restart-tasks-rpi-green:
     needs: build-rpi-green
@@ -40,8 +40,8 @@ jobs:
         clean: false
     - name: Stop service
       run: sudo systemctl stop social-tasks
-    - name: Build debug
-      run: cargo update && cargo build
+    - name: Build release
+      run: cargo update && cargo build -r
 
   restart-tasks-slave-green:
     needs: build-slave-green
@@ -60,8 +60,8 @@ jobs:
         clean: false
     - name: Stop service
       run: sudo systemctl stop social-tasks
-    - name: Build debug
-      run: cargo update && cargo build
+    - name: Build release
+      run: cargo update && cargo build -r
 
   restart-tasks-hpgreen:
     needs: build-hpgreen
